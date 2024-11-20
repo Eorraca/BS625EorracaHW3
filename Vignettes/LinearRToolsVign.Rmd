@@ -1,0 +1,164 @@
+---
+title: "Practical Guide for R package LinearRTools"
+author: "Elizabeth Orraca"
+output: rmarkdown::html_vignette
+Vignette: >
+  %\\VignetteIndexEntry{LinearRTools_examples} 
+  %\\VignetteEngine{knitr::rmarkdown}
+  %\\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+Setting up package installation:
+```{r}
+# install.packages("devtools")
+devtools::install_github("Eorraca/BS625EorracaHW3")
+library(LinearRTools)
+```
+
+
+The LinearRTools package is useful for analyzing different measures of analysis when looking at linear regression. In this vignette, we will go step by step through each function, go through some examples and compare it to its similar function 
+
+
+
+## 1. Confidence Intervals
+*Confidence_OPT(model)*
+
+For looking at Confidence Intervals, we will be simulating a simple linear regression, using the common dataset. This same linear regression function will be used for the rest of the examples.
+```{r}
+data(mtcars)
+modelx <- lm(mpg ~ wt + hp, data = mtcars)
+```
+
+Our first measure of interest is confidence intervals. We will be looking at the true parameters of our estimated coefficients for the model. In this example we are 95% confident that our true parameters are within our interval.
+
+```{r}
+print(Confidence_OPT(modelx, level=.95))
+```
+
+The above output shows our intervals for each of coefficients including our intercept.
+```{r}
+# Accuracy: 
+print(Confidence_OPT(modelx, level=.95))
+print(confint(modelx,level= .95))
+
+print(paste0("All methods return the same output: ", all.equal(Confidence_OPT(modelx, level=.95), confint(modelx,level= .95))))
+
+# Efficiency
+bench::mark(Confidence_OPT(modelx, level=.95), confint(modelx, level=.95))
+
+```
+We can see that the outputs are identical for both functions. The efficiency of both are also close with our min,median, and itr/sec being faster.
+
+
+## 2. Residual
+*resid_OPT(model)*
+
+This will be looking at the basic residuals from our above model. This is the difference between our y and our fitted values
+
+```{r}
+print(resid_OPT(modelx))
+```
+
+Now we will compare it to the original residual function.
+
+```{r}
+# Accuracy
+print(resid_OPT(modelx))
+print(residuals(modelx))
+
+print(paste0("All methods return the same output: ", all.equal(resid_OPT(modelx), residuals(modelx))))
+
+# Efficiency
+bench::mark(resid_OPT(modelx),residuals(modelx))
+```
+
+Again, we can see that the outputs are identical for both functions. The efficiency of both are also close with our min,median, and itr/sec being faster for our new function.
+
+
+## 3. Standardized Residuals
+*Rstand_OPT(model)*
+
+This will look at the standardized residuals, which is our residual divided by our standard deviation.
+
+```{r}
+print(Rstand_OPT(modelx))
+```
+
+Now we will compare it to the original standardized residual function.
+
+```{r}
+# Accuracy: 
+print(Rstand_OPT(modelx))
+print(rstandard(modelx))
+
+print(paste0("All methods return the same output: ",
+             all.equal(Rstand_OPT(modelx),rstandard(modelx))))
+
+# Efficiency
+bench::mark(Rstand_OPT(modelx),rstandard(modelx))
+```
+Again, we can see that the outputs are identical for both functions. The efficiency of both are also close with our min,median, and itr/sec being faster for our new function.
+
+
+## 4. Cook's Distance
+*cooksd_OPT(model)*
+
+Cook's distance is used to identify influential points in the model, and shows the impact it would have if that point was removed from the model. Distances close to 1 show little to no effect on the model, while the opposite is true if they are far from 1.
+
+```{r}
+print(cooksd_OPT(modelx))
+```
+
+Now we will compare it to the original cook's distance function.
+
+```{r}
+# Accuracy: 
+print(cooksd_OPT(modelx))
+print(cooks.distance(modelx))
+
+print(paste0("All methods return the same output: ",
+             all.equal(cooksd_OPT(modelx), cooks.distance(modelx))))
+
+# Efficiency
+bench::mark(cooksd_OPT(modelx), cooks.distance(modelx))
+```
+
+Again, we can see that the outputs are identical for both functions. The efficiency of both are also close with our min,median, and itr/sec being faster for our new function.
+
+
+## 5. VIF (Variance inflation factor)
+*vif_OPT(model)*
+
+This looks at VIF which estimates how much of the variance of our regression coefficient is inflated due to collinearity in the model. VIF of 1 means no correlation, 1 to 5 is moderate and above 5 is significant correlation. 
+
+
+```{r}
+print(vif_OPT(modelx))
+```
+
+This shows that within our practice model there is moderate correlation.
+
+```{r}
+# Accuracy: 
+print(vif_OPT(modelx))
+print(car::vif(modelx))
+
+print(paste0("All methods return the same output: ",
+             all.equal(vif_OPT(modelx), car::vif(modelx))))
+
+# Efficiency
+bench::mark(vif_OPT(modelx), car::vif(modelx))
+```
+Our original function does work much faster; However, I have adapted the function so that way it works with high multicollinearity instead of returning an error as shown in our provided test cases. So the slower time is the drawback.
+
+
+Now, we have done cases for each of the five functions in our package and compared their accuracy and efficiency.
+---
+
