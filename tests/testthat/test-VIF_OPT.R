@@ -1,4 +1,4 @@
-test_that("vif_OPT calculates VIFs correctly for a linear model", {
+test_that("vif_OPT calculates VIFs for a linear model", {
   data(mtcars)
   modelx <- lm(mpg ~ wt + hp + qsec, data = mtcars)
   vif_v <- vif_OPT(modelx)
@@ -7,7 +7,7 @@ test_that("vif_OPT calculates VIFs correctly for a linear model", {
   expect_true(all(names(vif_v) %in% c("wt", "hp", "qsec")))
 })
 
-test_that("vif_OPT handles missing values appropriately", {
+test_that("vif_OPT handles missing values correctly", {
   data_na <- data.frame(
     y = c(1, 2, NA, 4, 5),
     x1 = c(1, 2, 3, NA, 5),
