@@ -1,4 +1,4 @@
-test_that("vif_OPT calculates VIFs for a linear model", {
+test_that("vif_OPT calculates VIFs for linear model", {
   data(mtcars)
   modelx <- lm(mpg ~ wt + hp + qsec, data = mtcars)
   vif_v <- vif_OPT(modelx)
