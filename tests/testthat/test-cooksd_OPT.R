@@ -19,7 +19,7 @@ test_that("cooksd_OPT works for models with no predictors", {
 })
 
 
-test_that("cooksd_OPT handles missing values correctly", {
+test_that("cooksd_OPT handles missing values", {
  data_na <- data.frame(x = c(1, 2, 3, 4), y = c(3, NA, 5, 6))
   modelx_na <- lm(y ~ x, data =data_na)
   cooksd_na <- cooksd_OPT(modelx_na)
