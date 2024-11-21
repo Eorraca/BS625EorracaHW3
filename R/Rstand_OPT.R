@@ -14,20 +14,24 @@
 #' Rstand_OPT(modelx)
 #' @export
 Rstand_OPT <- function(model) {
-  #Make sure model is linear
-  if (!inherit(model, "lm")) stop("Input must be linear")
-  #Pull out residuals,fitted values, number of observations and number of predictors
+  # Check if the class of the model is 'lm'
+  if (!identical(class(model), "lm")) stop("Input must be linear")
+
+  # Pull out residuals, fitted values, number of observations, and number of predictors
   resid <- residuals(model)
-  fitted_v <-fitted(model)
+  fitted_v <- fitted(model)
   n <- length(resid)
   p <- length(coef(model))
-  #Compute residual sum of squares, residual standard error, leverage values
+
+  # Compute residual sum of squares, residual standard error, leverage values
   rss <- sum(resid^2)
-  rse <- sqrt(rss/(n-p))
+  rse <- sqrt(rss / (n - p))
   lv <- hatvalues(model)
-  #Compute Standard residuals
-  rstand <- resid/ (rse*sqrt(1-lv))
+
+  # Compute Standard residuals
+  rstand <- resid / (rse * sqrt(1 - lv))
 
   return(rstand)
-
 }
+
+

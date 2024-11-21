@@ -9,13 +9,16 @@
 #' resid_OPT(modelx)
 #' @export
 resid_OPT <- function(model) {
-  # Make sure model is linear
-  if (!inherit(model, "lm")) stop("Input must be linear")
-  #Pull Y and fitted values
+  # Check if the class of the model is 'lm'
+  if (!any(class(model) == "lm")) stop("Input must be linear")
+
+  # Pull Y and fitted values
   y <- model$model[[1]]
   fitted_v <- model$fitted.values
-  #Calculate residuals
+
+  # Calculate residuals
   resid <- y - fitted_v
 
   return(resid)
 }
+

@@ -156,8 +156,8 @@ print(paste0("All methods return the same output: ",
 # Efficiency
 bench::mark(vif_OPT(modelx), car::vif(modelx))
 ```
-Our original function does work much faster; However, I have adapted the function so that way it works with high multicollinearity instead of returning an error as shown in our provided test cases. So the slower time is the drawback.
 
+Again, we can see that the outputs are identical for both functions. The efficiency of both are also close with the total time being the same.
 
 Now, we have done cases for each of the five functions in our package and compared their accuracy and efficiency.
 ---

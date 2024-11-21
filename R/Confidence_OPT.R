@@ -21,21 +21,21 @@ Confidence_OPT <- function(model,level) {
   lower_p <- alpha/2
   upper_p <- 1-lower_p
   t_value <- qt(upper_p, df=df)
-  standard_err <- sqrt(diag(vcov_matrix))
+  standard_err <- sqrt(diag(cov_mat))
   #Compute Confidence Interval
   lower_b <-coeff - t_value*standard_err
   upper_b <-coeff + t_value*standard_err
   #Formatting for output
-  lower_col<-paste0(lower_p*100,"%")
-  upper_col<-paste0(upper_p*100,"%")
+  lower_col<-paste0(lower_p*100," %")
+  upper_col<-paste0(upper_p*100," %")
   #Combine results into data frame
-  conf_int <- data.frame(
-    lower_b = lower_b,
-    upper_b = upper_b,
-    row.names = names(coeff)
-  )
+  conf_int <- cbind(lower_b, upper_b)
+  rownames(conf_int) <- names(coeff)
   colnames(conf_int) <- c(lower_col,upper_col)
-  rownames(conf_int)<- names(coeff)
-  return(conf_ints)
+  return(conf_int)
 }
+
+
+
+
 
