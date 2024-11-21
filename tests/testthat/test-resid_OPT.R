@@ -1,4 +1,4 @@
-test_that("resid_OPT correctly calculates residuals", {
+test_that("resid_OPT calculates residuals", {
   data(mtcars)
   modelx <- lm(mpg ~ wt + hp, data = mtcars)
   resid_values <- resid_OPT(modelx)
