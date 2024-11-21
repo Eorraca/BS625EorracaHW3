@@ -13,7 +13,7 @@ test_that("resid_OPT returns residuals with correct length", {
   expect_equal(length(resid_values), nrow(mtcars))
 })
 
-test_that("resid_OPT works for simple linear model with single predictor", {
+test_that("resid_OPT works for linear model with single predictor", {
   data(mtcars)
   modelx_s <- lm(mpg ~ wt, data = mtcars)
   resid_s <- resid_OPT(modelx_s)
