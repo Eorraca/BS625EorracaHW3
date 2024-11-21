@@ -7,7 +7,8 @@ You can install LinearRTools from GitHub with:
 
 # install.packages("devtools")
 devtools::install_github("EOrraca/BS625EorracaHW3")
-Example
+
+Examples
 These are basic examples which show you how to use each function:
 
 library(LinearRTools)
@@ -24,17 +25,17 @@ Confidence_OPT(modelx, level =.95)
 Example of Residual Calculation
 resid_OPT(modelx)
 #>      Mazda RX4       Mazda RX4 Wag          Datsun 710      Hornet 4 Drive   Hornet Sportabout             Valiant 
-#        -2.57232940         -1.58348256         -2.47581872          0.13497989          0.37273336         -2.37381631 
-#         Duster 360           Merc 240D            Merc 230            Merc 280           Merc 280C          Merc 450SE 
-#        -1.29904236          1.51293266          0.80632669         -0.77945988         -2.17945988          0.67463146 
-#         Merc 450SL         Merc 450SLC  Cadillac Fleetwood Lincoln Continental   Chrysler Imperial            Fiat 128 
-#         0.25616901         -1.64993945          0.04479541          1.03726743          5.50751301          5.80097202 
-#        Honda Civic      Toyota Corolla       Toyota Corona    Dodge Challenger         AMC Javelin          Camaro Z28 
-#         1.08761978          5.85379085         -3.08644148         -3.31136386         -3.94097947         -1.25202805 
-#   Pontiac Firebird           Fiat X1-9       Porsche 914-2        Lotus Europa      Ford Pantera L        Ferrari Dino 
-#         2.44325481         -0.32665313         -0.03737415          2.63023081         -0.74648866         -1.22541324 
-#      Maserati Bora          Volvo 142E 
-#         2.26052287         -1.58364943
+      -2.57232940         -1.58348256         -2.47581872          0.13497989          0.37273336         -2.37381631 
+         Duster 360           Merc 240D            Merc 230            Merc 280           Merc 280C          Merc 450SE 
+        -1.29904236          1.51293266          0.80632669         -0.77945988         -2.17945988          0.67463146 
+         Merc 450SL         Merc 450SLC  Cadillac Fleetwood Lincoln Continental   Chrysler Imperial            Fiat 128 
+         0.25616901         -1.64993945          0.04479541          1.03726743          5.50751301          5.80097202 
+        Honda Civic      Toyota Corolla       Toyota Corona    Dodge Challenger         AMC Javelin          Camaro Z28 
+         1.08761978          5.85379085         -3.08644148         -3.31136386         -3.94097947         -1.25202805 
+   Pontiac Firebird           Fiat X1-9       Porsche 914-2        Lotus Europa      Ford Pantera L        Ferrari Dino 
+         2.44325481         -0.32665313         -0.03737415          2.63023081         -0.74648866         -1.22541324 
+      Maserati Bora          Volvo 142E 
+         2.26052287         -1.58364943
 Example of Standardized residuals
 Rstand_OPT(modelx)
 #>          Mazda RX4       Mazda RX4 Wag          Datsun 710      Hornet 4 Drive   Hornet Sportabout             Valiant 
