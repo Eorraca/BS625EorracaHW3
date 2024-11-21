@@ -1,4 +1,4 @@
-test_that("Rstand_OPT raises an error for non-lm models", {
+test_that("Rstand_OPT has error for non-lm models", {
   data(mtcars)
   modelx <- lm(mpg ~ wt + hp, data = mtcars)
   gmodelx <- glm(mpg ~ wt + hp, data = mtcars)
@@ -17,7 +17,7 @@ test_that("Rstand_OPT computes correct standardized residuals", {
 })
 
 
-test_that("Rstand_OPT works correctly for models with no predictors", {
+test_that("Rstand_OPT works for models with no predictors", {
   small_data <- data.frame(y = c(3, 4, 5, 6, 7))
   modelx_no_predictors <- lm(y ~ 1,data = small_data)
   rstand_int <- Rstand_OPT(modelx_no_predictors)
